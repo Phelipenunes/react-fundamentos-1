@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import imagemloading from "../assets/loading.svg";
+import { Link } from "react-router-dom";
 
 function Produtos() {
   /* o state "produtos" é iniciado como um array vazio posteriomente (após o carregamento dos dados da API), ele será preenchido com os objetos */
@@ -27,7 +29,9 @@ function Produtos() {
     <article>
       <h2>Produtos</h2>
       {loading ? (
-        <p>Carregando dados</p>
+        <p style={{ textAlign: "center" }}>
+          <img src={imagemloading} alt="Carregando..." />
+        </p>
       ) : (
         produtos.map((produtos) => {
           return (
@@ -35,6 +39,9 @@ function Produtos() {
               <h3>{produtos.title}</h3>
               <p>Preço: {produtos.price}</p>
               <p>descrição: {produtos.description}</p>
+              <p>
+                <Link to={`/produtos/${produtos.id}`}>Ver detalhes</Link>
+              </p>
             </section>
           );
         })
